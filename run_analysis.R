@@ -2,8 +2,8 @@
 library(dplyr)
 
 # Read all files
-feat <- read.table("features.txt")
-act.lab <- read.table("activity_labels.txt")
+feat <- read.table("./other/features.txt")
+act.lab <- read.table("./other/activity_labels.txt")
 
 test.X <- read.table("./test/X_test.txt")
 test.y <- read.table("./test/y_test.txt")
@@ -44,7 +44,7 @@ colnames(dat) <- c("Activity", "Subject", as.character(desc$V2))
 grouped.data <- dat %>% group_by(Activity,Subject) %>% summarise_each(funs(mean))
 
 # Write data to file
-write.table(grouped.data, file = "grouped_data.txt")
+write.table(grouped.data, file = "grouped_data.txt", row.names = FALSE)
 
 
 
