@@ -25,6 +25,9 @@ The columns are arranged as follows:
 3. to 88. Mean values of the various sensor measurements mean and standard deviation values (see below).
 
 #### Variable Naming Convention
+
+The original names of the variables are found in the reproduced text below. As these names appear rather cryptic, the columns in the output of **run_analysis.R** were renamed to the values found in the section *value readings* below.
+
 (Reproduced from **features_info.txt** that was supplied with the original data.)
 
 [...] the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
