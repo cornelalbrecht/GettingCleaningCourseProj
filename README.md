@@ -34,8 +34,8 @@ The following steps are performed within the script:
 library(dplyr)
 
 # Read all files
-feat <- read.table("features.txt")
-act.lab <- read.table("activity_labels.txt")
+feat <- read.table("./other/features.txt")
+act.lab <- read.table("./other/activity_labels.txt")
 
 test.X <- read.table("./test/X_test.txt")
 test.y <- read.table("./test/y_test.txt")
@@ -70,13 +70,28 @@ dat <- dat[,-1] # Remove extra column with Activity ID that stems from the mergi
 
 # Make the Column names all nice
 desc <- feat[filt.vars,]
+
+desc$V2 <- gsub("Acc", ".Acceleration.", desc$V2)
+desc$V2 <- gsub("Gyro", ".Gyroscope.", desc$V2)
+desc$V2 <- gsub("mean\\(\\)", ".MeanValue.", desc$V2)
+desc$V2 <- gsub("meanFreq\\(\\)", ".MeanFrequency.", desc$V2)
+desc$V2 <- gsub("std\\(\\)", ".StandardDeviation.", desc$V2)
+desc$V2 <- gsub("tBody", "TimeDomain.Body", desc$V2)
+desc$V2 <- gsub("fBody", "FrequencyDomain.Body", desc$V2)
+desc$V2 <- gsub("tGravity", "TimeDomain.Gravity", desc$V2)
+desc$V2 <- gsub("-X", "-X.Direction", desc$V2)
+desc$V2 <- gsub("-Y", "-Y.Direction", desc$V2)
+desc$V2 <- gsub("-Z", "-Z.Direction", desc$V2)
+desc$V2 <- gsub("angle\\(", "Angle.of.\\(", desc$V2)
+desc$V2 <- gsub("Mag", "Magnitude", desc$V2)
+
 colnames(dat) <- c("Activity", "Subject", as.character(desc$V2))
 
 # Group and summarize data with dplyr package 
 grouped.data <- dat %>% group_by(Activity,Subject) %>% summarise_each(funs(mean))
 
 # Write data to file
-write.table(grouped.data, file = "grouped_data.txt")
+write.table(grouped.data, file = "grouped_data.txt", row.names = FALSE)
 ```
 
 

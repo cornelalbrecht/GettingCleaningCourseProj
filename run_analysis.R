@@ -38,6 +38,21 @@ dat <- dat[,-1] # Remove extra column with Activity ID that stems from the mergi
 
 # Make the Column names all nice
 desc <- feat[filt.vars,]
+
+desc$V2 <- gsub("Acc", ".Acceleration.", desc$V2)
+desc$V2 <- gsub("Gyro", ".Gyroscope.", desc$V2)
+desc$V2 <- gsub("mean\\(\\)", ".MeanValue.", desc$V2)
+desc$V2 <- gsub("meanFreq\\(\\)", ".MeanFrequency.", desc$V2)
+desc$V2 <- gsub("std\\(\\)", ".StandardDeviation.", desc$V2)
+desc$V2 <- gsub("tBody", "TimeDomain.Body", desc$V2)
+desc$V2 <- gsub("fBody", "FrequencyDomain.Body", desc$V2)
+desc$V2 <- gsub("tGravity", "TimeDomain.Gravity", desc$V2)
+desc$V2 <- gsub("-X", "-X.Direction", desc$V2)
+desc$V2 <- gsub("-Y", "-Y.Direction", desc$V2)
+desc$V2 <- gsub("-Z", "-Z.Direction", desc$V2)
+desc$V2 <- gsub("angle\\(", "Angle.of.\\(", desc$V2)
+desc$V2 <- gsub("Mag", "Magnitude", desc$V2)
+
 colnames(dat) <- c("Activity", "Subject", as.character(desc$V2))
 
 # Group and summarize data with dplyr package 
